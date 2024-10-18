@@ -7,6 +7,39 @@ def validatingdrink():
         drinkchoice = input("What drink are you having?").lower().strip()
     return drinkchoice
     
+def sugar():
+    inp = ""
+    inp = int(input("How many teaspoons of sugar would you like?"))
+    return inp
+
+def milk():
+    validmilktypes = ["whole", "skimmed","lowfat","almond","coconut","soy", "oat","none"]
+    milkteaspoons = 0
+    milktype = ""
+    while (milktype not in validmilktypes):
+        milktype = input("What kind of milk would you like?").lower().strip()
+    
+    if milktype != "none":
+        milkteaspoons = int(input("How many teaspoons of milk would you like?"))
+    else:
+        return 0
+    
+    match milktype:
+        case "whole":
+            return milkteaspoons * 5
+        case "skimmed":
+            return milkteaspoons * 5
+        case "lowfat":
+            return milkteaspoons * 10
+        case "almond":
+            return milkteaspoons * 15
+        case "coconut":
+            return milkteaspoons * 15
+        case "soy":
+            return milkteaspoons * 10
+        case "oat":
+            return milkteaspoons * 20
+        
 
 def validatingcoins():
     validcoins = [50,20,10,5]
@@ -28,13 +61,14 @@ match (validatingdrink()):
     case "coffee":
        choiceofshot = ""
        while (choiceofshot != "y" and choiceofshot != "n"):
-            choiceofshot = input("Would you like an additional shot of coffee? y/n ").lower().strip()
+            choiceofshot = input("Would you like additional shots of coffee? y/n ").lower().strip()
        if choiceofshot == "y":
-            price = 95
+            numofshots = int(input("How many additional shots would you like?"))
+            price = 75 + (numofshots * 20) + (sugar() * 5) + (milk())
        else:
             price = 75
     case "tea":
-        price = 75
+        price = 75 + (sugar() * 5) + (milk())
     case "hot chocolate":
         price = 90
     case "juice":
